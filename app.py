@@ -21,13 +21,13 @@ with open('./data/prompttemplates.json') as json_data:
       prompts = json.load(json_data)
 
 model = ChatGoogleGenerativeAI(model="gemini-1.0-pro-latest",
-                            google_api_key=GEMINI_API_KEY,
+                            google_api_key="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g",
                             temperature=0.2,
                             convert_system_message_to_human=True)
 
 def retriever_existingdb():
     embeddings = HuggingFaceEmbeddings()
-    vectorstore = PineconeVectorStore.from_existing_index(index_name=PINECONE_INDEX, embedding=embeddings)
+    vectorstore = PineconeVectorStore.from_existing_index(index_name=geminiindex, embedding=embeddings)
     retriever = vectorstore.as_retriever(
     search_type="similarity_score_threshold", search_kwargs={"score_threshold": 0.5}
     )
