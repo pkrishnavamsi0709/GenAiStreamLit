@@ -5,5 +5,5 @@ langchain
 langchain_community
 python-dotenv
 google.generativeai
-sentence-transformers.
+sentence-transformers
 pinecone
