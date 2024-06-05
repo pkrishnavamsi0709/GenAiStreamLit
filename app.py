@@ -111,5 +111,5 @@ def contentgenerator_ai():
     #    return query_llm(retriever, queryfromfe)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="https://genaiapp-hvy43lluqfahvzzrefkeat.streamlit.app/")
     
