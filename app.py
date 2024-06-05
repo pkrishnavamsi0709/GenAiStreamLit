@@ -112,5 +112,5 @@ def contentgenerator_ai():
     #    return query_llm(retriever, queryfromfe)
 
 if __name__ == '__main__':
-    app.run(host="localhost", port=8000)   
+    app.run(host="localhost", port=8001)   
     
