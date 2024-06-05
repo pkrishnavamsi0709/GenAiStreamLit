@@ -9,4 +9,4 @@ google.generativeai
 sentence-transformers
 pinecone
 Flask
-waitress
+gunicorn==20.1.0
