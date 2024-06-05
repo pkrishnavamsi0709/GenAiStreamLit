@@ -111,6 +111,8 @@ def contentgenerator_ai():
 #     #    retriever = retriever_existingdb()
     #    return query_llm(retriever, queryfromfe)
 
-if __name__ == '__main__':
-    app.run(host="localhost", port=8001,debug=True)   
+if __name__ == "__main__":
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
+    
     
