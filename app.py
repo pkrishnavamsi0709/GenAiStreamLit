@@ -112,8 +112,5 @@ def contentgenerator_ai():
     #    return query_llm(retriever, queryfromfe)
 
 if __name__ == '__main__':
-    if st._is_running_with_streamlit:
-        st.experimental_streamlit_server(run_on_save=True)
-    else:
-        app.run(host="localhost", port=8000)   
+    app.run(host="localhost", port=8000)   
     
