@@ -1,0 +1,9 @@
+google-generativeai
+langchain_google_genai
+streamlit
+langchain
+langchain_community
+python-dotenv
+google.generativeai
+sentence-transformers.
+pinecone
