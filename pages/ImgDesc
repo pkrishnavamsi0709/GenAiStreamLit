@@ -6,7 +6,7 @@ from PIL import Image
 import io
 
 # Configure the Generative AI API
-GEMINI_API_KEY = "YOUR_API_KEY"  # Replace "YOUR_API_KEY" with your actual API key
+GEMINI_API_KEY = "AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g"  # Replace "YOUR_API_KEY" with your actual API key
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Streamlit app
