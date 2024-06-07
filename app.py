@@ -41,6 +41,7 @@ def askgenaibot(Query):
     return response.text
 
 st.title('Ask GPT-3 AI Bot')
+st.sidebar.success("select a page above")
 
 usertext = st.text_input("Enter your query:")
 
