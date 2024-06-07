@@ -7,7 +7,7 @@ import io
 
 # Configure the Generative AI API
 GEMINI_API_KEY = "AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g"  # Replace "YOUR_API_KEY" with your actual API key
-genai.configure(api_key=GEMINI_API_KEY)
+genai.configure(api_key="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g")
 
 # Streamlit app
 st.title("Image to Text Converter")
