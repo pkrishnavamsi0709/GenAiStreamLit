@@ -1,9 +1,8 @@
-import streamlit as st
 import google.generativeai as genai
+import streamlit as st
 
-from environment import GEMINI_API_KEY
+genai.configure(api_key="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g")
 
-genai.configure(api_key=GEMINI_API_KEY)
 
 generation_config = {
   "temperature": 0.9,
@@ -31,6 +30,16 @@ safety_settings = [
   },
 ]
 
+def askgenaibot(Query):
+    # data = json.loads(request.data)
+    usertext = Query
+    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
+                              generation_config=generation_config,
+                              safety_settings=safety_settings)
+    print("UserQuery:",usertext)
+    response = model.generate_content(f"Generate Content {usertext}")
+    return response.text
+
 st.title('Ask GPT-3 AI Bot')
 
 usertext = st.text_input("Enter your query:")
@@ -41,3 +50,4 @@ if st.button("Generate Response"):
                                   safety_settings=safety_settings)
     response = model.generate_content(f"Generate Content {usertext}")
     st.write(response.text)
+    
