@@ -92,5 +92,3 @@ if speak is not None:
         st.subheader("The Response is")
         st.write(response)
  
- 
-has context menu
