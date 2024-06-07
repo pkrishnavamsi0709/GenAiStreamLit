@@ -10,3 +10,4 @@ sentence-transformers
 pinecone
 Flask
 gunicorn==20.1.0
+pillow
