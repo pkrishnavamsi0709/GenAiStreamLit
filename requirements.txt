@@ -10,5 +10,4 @@ sentence-transformers
 pinecone
 pillow
 SpeechRecognition
-pyaudio
 
