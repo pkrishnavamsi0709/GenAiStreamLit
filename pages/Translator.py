@@ -2,7 +2,9 @@ import os
 import google.generativeai as genai
 import streamlit as st
  
-api_key = os.getenv("AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g")
+load_dotenv()  
+ 
+api_key = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=api_key)
  
 st.set_page_config(page_title="Language Translator", page_icon="🌐")
