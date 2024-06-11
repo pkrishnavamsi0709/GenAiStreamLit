@@ -1,53 +1,27 @@
-import google.generativeai as genai
 import streamlit as st
 
-genai.configure(api_key="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g")
+
+st.title("Chat With AI")
+
+# Load your images
+image1 = "https://i0.wp.com/modernretail.co.uk/wp-content/uploads/2018/09/shutterstock_1067702951.png?fit=740%2C545&ssl=1"
+image2 = "https://i0.wp.com/modernretail.co.uk/wp-content/uploads/2018/09/shutterstock_1067702951.png?fit=740%2C545&ssl=1"
+image3 = "https://analyticsindiamag.com/wp-content/uploads/2020/05/chatbot_adoption.jpg"
+image4 = "https://analyticsindiamag.com/wp-content/uploads/2020/05/chatbot_adoption.jpg"
+
+# Display images in a square format using Streamlit's columns layout
+col1, col2 = st.columns(2)
+
+with col1:
+    st.image(image1, caption='AI ChatBot', use_column_width=True)
+
+    # Adjust size if necessary
+    st.image(image3, caption='AI ChatBot', use_column_width=True)
+
+with col2:
+    st.image(image2, caption='AI ChatBot', use_column_width=True)
+
+    # Adjust size if necessary
+    st.image(image4, caption='AI ChatBot', use_column_width=True)
 
 
-generation_config = {
-  "temperature": 0.9,
-  "top_p": 1,
-  "top_k": 1,
-  "max_output_tokens": 2048,
-}
-
-safety_settings = [
-  {
-    "category": "HARM_CATEGORY_HARASSMENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-  {
-    "category": "HARM_CATEGORY_HATE_SPEECH",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-  {
-    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-  {
-    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-]
-
-def askgenaibot(Query):
-    # data = json.loads(request.data)
-    usertext = Query
-    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
-                              generation_config=generation_config,
-                              safety_settings=safety_settings)
-    print("UserQuery:",usertext)
-    response = model.generate_content(f"Generate Content {usertext}")
-    return response.text
-
-st.title('Ask GPT-3 AI Bot')
-
-usertext = st.text_input("Enter your query:")
-
-if st.button("Generate Response"):
-    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
-                                  generation_config=generation_config,
-                                  safety_settings=safety_settings)
-    response = model.generate_content(f"Generate Content {usertext}")
-    st.write(response.text)
-    
