@@ -12,4 +12,5 @@ pillow
 rapidocr-onnxruntime
 pypdf
 flask
+openpyxl
 
