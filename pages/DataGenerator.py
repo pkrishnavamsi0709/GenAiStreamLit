@@ -13,11 +13,9 @@ from langchain.prompts import ChatPromptTemplate
 import google.generativeai as genai
 
 PINECONE_API_KEY = "610b639f-dad6-48f9-a78a-7a55ca351a4c"
-PINECONE_SEO_INDEX = "seometadata"
+PINECONE_INDEX = "seometadata"
 GEMINI_API_KEY="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g"
 
-
-pc = Pinecone(api_key=PINECONE_API_KEY)
 
 TMP_DIR = Path(__file__).resolve().parent.joinpath('data', 'tmp')
 
