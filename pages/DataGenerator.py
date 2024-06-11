@@ -9,7 +9,7 @@ import streamlit as st
 from langchain.chains.question_answering import load_qa_chain
 from langchain_community.vectorstores import Pinecone
 from langchain.prompts import ChatPromptTemplate
-# from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 import google.generativeai as genai
 
 PINECONE_API_KEY = "610b639f-dad6-48f9-a78a-7a55ca351a4c"
@@ -30,8 +30,8 @@ st.title("CNX Malls Info AI ChatBot")
 #         st.write(index['index'])
 
 def retrive_data():
-    embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001',google_api_key=GEMINI_API_KEY)
-    # embeddings = HuggingFaceEmbeddings()
+    # embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001',google_api_key=GEMINI_API_KEY)
+    embeddings = HuggingFaceEmbeddings()
     vectordb = Pinecone.from_existing_index(index_name=PINECONE_INDEX, embedding=embeddings)
     retriever = vectordb.as_retriever() 
     return retriever
