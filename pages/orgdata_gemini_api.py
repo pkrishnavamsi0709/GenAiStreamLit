@@ -6,6 +6,10 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate
 import json
 
+GEMINI_API_KEY="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g";
+PINECONE_INDEX="geminiindex";
+
+
 # Load prompts from JSON file
 with open('./data/prompttemplates.json') as json_data:
     prompts = json.load(json_data)
