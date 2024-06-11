@@ -8,7 +8,7 @@ from pinecone import Pinecone, ServerlessSpec
 from langchain.chains import ConversationalRetrievalChain
 from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate, AIMessagePromptTemplate
 from langchain_core.prompts import PromptTemplate
-from environment import PINECONE_SEO_INDEX, GEMINI_API_KEY, PINECONE_API_KEY
+# from environment import PINECONE_SEO_INDEX, GEMINI_API_KEY, PINECONE_API_KEY
 from PIL import Image
 import langchain
 langchain.verbose = False
@@ -22,6 +22,11 @@ import openpyxl
 import tempfile
 import requests
 import io
+
+GEMINI_API_KEY="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g";
+PINECONE_INDEX="geminiindex";
+PINECONE_API_KEY="610b639f-dad6-48f9-a78a-7a55ca351a4c"
+
 
 pc = Pinecone(api_key=PINECONE_API_KEY)
 # pineconeindex = pc.Index(PINECONE_SEO_INDEX)
