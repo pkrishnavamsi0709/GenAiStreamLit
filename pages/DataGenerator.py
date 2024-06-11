@@ -13,7 +13,7 @@ from langchain.prompts import ChatPromptTemplate
 import google.generativeai as genai
 
 PINECONE_API_KEY = "610b639f-dad6-48f9-a78a-7a55ca351a4c"
-PINECONE_INDEX = "seometadata"
+PINECONE_INDEX = "geminiindex"
 GEMINI_API_KEY="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g"
 
 
