@@ -9,4 +9,7 @@ google.generativeai
 sentence-transformers
 pinecone
 pillow
+rapidocr-onnxruntime
+pypdf
+flask
 
