@@ -237,7 +237,6 @@ def uploadfile(uploaded_file):
 
 def main():
     st.title("Seo Data Generator Interface using Gemini AI")
-    st.subheader("File Data")
     uploaded_file = st.file_uploader("Choose the file to upload")
     if uploaded_file is not None:
         st.write(uploaded_file)
