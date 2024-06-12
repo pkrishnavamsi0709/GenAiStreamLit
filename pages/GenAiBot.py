@@ -11,7 +11,7 @@ genai.configure(api_key=api_key)
  
 st.set_page_config(page_title="Chatbot", page_icon="🤖")
  
-st.header("Chatbot 🤖")
+st.header("Chat Interface for Text Generation")
  
 generation_config = {
   "temperature": 0.9,
