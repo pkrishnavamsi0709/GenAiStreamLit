@@ -56,7 +56,7 @@ def contentgenerator_llm(retriever, query, contenttype, format):
     return result
 
 # Streamlit UI
-st.title("Org Data Generator Interface using Gemini AI")
+st.title("Chatbot For Organizational Data")
 
 # Content Generator Functionality
 queryfromfe = st.text_input("Enter your query:")
