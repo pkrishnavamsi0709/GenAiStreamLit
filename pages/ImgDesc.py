@@ -31,7 +31,8 @@ def get_gemini_response(prompt_formatted_str,image):
        response = model.generate_content(image)
     return response.text
  
-st.header("Image Description Interface Using AI Model")
+# st.header("Image Description Interface Using AI Model")
+st.header("Image to Text Bot")
 # input = st.text_input("Input Prompt: ",key="input")
 input = "describe the object"
 prompt_formatted_str: str = prompt.format(
