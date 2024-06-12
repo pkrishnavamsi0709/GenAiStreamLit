@@ -10,7 +10,7 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=api_key)
  
-st.set_page_config(page_title="Description of Products", page_icon="📸")
+st.set_page_config(page_title="Image Description Interface Using AI Model", page_icon="📸")
  
 prompt_template: str = """/
 Use the following pieces of context to answer the question/
@@ -31,7 +31,7 @@ def get_gemini_response(prompt_formatted_str,image):
        response = model.generate_content(image)
     return response.text
  
-st.header("Image Description 🖼️")
+st.header("Image Description Interface Using AI Model")
 # input = st.text_input("Input Prompt: ",key="input")
 input = "describe the object"
 prompt_formatted_str: str = prompt.format(
