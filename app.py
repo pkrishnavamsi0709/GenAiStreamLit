@@ -1,27 +1,18 @@
 import streamlit as st
 
+website_url = "https://vamsi-genai.streamlit.app/"
 
-st.title("Chat With AI")
+# Define the URLs of the images and the URLs of the pages you want to navigate to
+image_urls = [
+    ("https://www.ringcentral.com/gb/en/blog/wp-content/uploads/2021/01/artificial-intelligenceai-chat-bot-concept-1536x1024.jpg", website_url+"/Chat_Bot","ChatBot"),
+    ("https://tse2.mm.bing.net/th?id=OIP.MgRQ7QtM_TvVtnuwOnD-jAHaEK&pid=Api&P=0&h=220", website_url+"/Content_Generator","Content Generator"),
+    ("https://analyticsindiamag.com/wp-content/uploads/2020/05/chatbot_adoption.jpg", website_url+"/Image_to_Text_Description","Image to Text"),
+    ("https://aviancetechnologies.com/wp-content/uploads/2022/05/free-meta-tag-generator.jpg", website_url+"/Seo_MetaData_Generator","Seo MetaData Generator"),
+    ("https://murf.ai/resources/media/posts/97/concept-program-smartphone-translate-from-different-languages.jpg", website_url+"/Translator","Translator")
+]
 
-# Load your images
-image1 = "https://i0.wp.com/modernretail.co.uk/wp-content/uploads/2018/09/shutterstock_1067702951.png?fit=740%2C545&ssl=1"
-image2 = "https://i0.wp.com/modernretail.co.uk/wp-content/uploads/2018/09/shutterstock_1067702951.png?fit=740%2C545&ssl=1"
-image3 = "https://analyticsindiamag.com/wp-content/uploads/2020/05/chatbot_adoption.jpg"
-image4 = "https://analyticsindiamag.com/wp-content/uploads/2020/05/chatbot_adoption.jpg"
-
-# Display images in a square format using Streamlit's columns layout
-col1, col2 = st.columns(2)
-
-with col1:
-    st.image(image1, caption='AI ChatBot', use_column_width=True)
-
-    # Adjust size if necessary
-    st.image(image3, caption='AI ChatBot', use_column_width=True)
-
-with col2:
-    st.image(image2, caption='AI ChatBot', use_column_width=True)
-
-    # Adjust size if necessary
-    st.image(image4, caption='AI ChatBot', use_column_width=True)
-
+for image_url, page_url , name in image_urls[:5]:
+    st.title(name+":")
+    st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' width='700' height='450'></a>", unsafe_allow_html=True)
+      
 
