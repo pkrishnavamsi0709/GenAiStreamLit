@@ -13,6 +13,6 @@ image_urls = [
 
 for image_url, page_url , name in image_urls[:5]:
     st.title(name+":")
-    st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' width='700' height='450'></a>", unsafe_allow_html=True)
+    st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' width='600' height='350'></a>", unsafe_allow_html=True)
       
 
