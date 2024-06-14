@@ -117,10 +117,11 @@ st.title("Chat with Organizational Data")
 # Content Generator Functionality
 queryfromfe = st.text_input("Enter your query:")
 querybytype = st.checkbox("QueryByType: Article or Blog")
-contenttype = st.selectbox("Content Type", ["Article", "Blog"])  # Assuming you have these options
-format_type = st.selectbox("Format Type", ["Template1", "Template2"])  # Assuming you have these options
 
 if not querybytype:
+    contenttype = st.selectbox("Content Type", ["Article", "Blog"])  # Assuming you have these options
+    format_type = st.selectbox("Format Type", ["Template1", "Template2"])  # Assuming you have these options
+
     if(contenttype == "Article" and format_type == "Template1"):
         st.text("Article Template 1:\nArticle Title \n" +
                                 "Article Body \n")
