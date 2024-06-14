@@ -21,37 +21,59 @@ import streamlit as st
 import openpyxl
 import tempfile
 import requests
-import io
-
-GEMINI_API_KEY="AIzaSyDcF1LrSLzb9l3B7NfS_5LFNyoGnMv6K_g";
-PINECONE_INDEX="geminiindex";
-PINECONE_API_KEY="610b639f-dad6-48f9-a78a-7a55ca351a4c"
+import io, json
+from dotenv import load_dotenv
+import os
 
 
-pc = Pinecone(api_key=PINECONE_API_KEY)
-# pineconeindex = pc.Index(PINECONE_SEO_INDEX)
-genai.configure(api_key=GEMINI_API_KEY)
+load_dotenv()  
+
+
+# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+# PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+# PINECONE_SEO_INDEX = os.getenv("PINECONE_SEO_INDEX")
+
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
+PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
+PINECONE_SEO_INDEX = st.secrets["PINECONE_SEO_INDEX"]
  
+# pineconeindex = pc.Index(PINECONE_SEO_INDEX)
+pc = Pinecone(api_key=PINECONE_API_KEY)
+genai.configure(api_key=GEMINI_API_KEY)
 def imagetotext(imageurl):
     #   converted_string = base64.b64encode(imageurl.read()) 
     #   print(converted_string)
       imageurlwords = imageurl.replace('/', " ").replace("."," ").replace("-"," ")
       print(imageurlwords)
 
-      headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-      result = requests.get(imageurl, headers=headers)
+      # Headers to mimic a browser visit
+      headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+            "Referer": "https://www.google.com/",
+            "Connection": "keep-alive"
+        } 
+      
+      try:
+            result = requests.get(imageurl, headers=headers, timeout=10)
+      except requests.exceptions.ConnectionError:
+            print("Site not rechable", imageurl)
+
       image = Image.open(io.BytesIO(result.content))
     #   image = Image.open(requests.get(imageurl, stream=True).raw)
       prompt_template: str = r"""
-          Given a specific context, Generate SEO Metadata details, use valid words from provided {imageurlwords} while generating the SEO metadata details, Strictly Use below Template:
+          Given a specific context, Generate SEO Metadata details in 'Json Format' as per provided template, use valid words from provided {imageurlwords} while generating the SEO metadata details, and Strictly Use below Template:
           FileName: filename for the image, which will define the image purpose
           Title: eyecatching title for the image, should be atleast 5 words
           Description: All the important details like configuration,features about the image, Not to exceed 50 words, should be in paragraph
-          Keywords: keywords for the image provided
+          Keywords: keywords for the image provided, should be string value
+
           role: Metadata Content Creator
           question: {question}
           imageurlwords: {imageurlwords}
-          """    
+          """     
       prompt = PromptTemplate.from_template(template=prompt_template)
       input = "follow template and role provided"
       prompt_formatted_str: str = prompt.format(question=input, imageurlwords = {imageurlwords})
@@ -100,11 +122,11 @@ def retriever_existingdb():
 
 def query_llm(retriever, query):
     general_system_template = r""" 
-    Given a specific context, Generate SEO Metadata details, Strictly Use below Template:
-    FileName-- filename for the PDF document, which will define the pdf document purpose
-    Title-- eyecatching title for the image, should be atleast 5 words
-    Description-- All the important details like configuration,features about the image, Not to exceed 50 words, should be in paragraph
-    Keywords-- keywords for the image provided
+    Given a specific context, Generate SEO Metadata details in 'Json Format' as per provided template, Strictly Use below Template:
+    FileName: filename for the PDF document, which will define the pdf document purpose
+    Title: eyecatching title for the image, should be atleast 5 words
+    Description: All the important details like configuration,features about the image, Not to exceed 50 words, should be in paragraph
+    Keywords: keywords for the image provided, should be string value
     ----
     {context}
     ----
@@ -159,25 +181,21 @@ def update_excel_with_seo(excel_file, filename, title, description, keywords):
 
     filenamecount = 2  # Start from the second row (assuming the first row is headers)
     for row in ws.iter_rows(min_row=2, max_row=len(filename)+1, min_col=3, max_col=3):  # Iterate over column "C"
-        print(len(filename), filename[0] , filename[1])
         row[0].value = filename[filenamecount - 2]  # Update cell value with filename
         filenamecount += 1
 
     titlecount = 2  # Start from the second row (assuming the first row is headers)
     for row in ws.iter_rows(min_row=2, max_row=len(title)+1, min_col=4, max_col=4):  # Iterate over column "C"
-        print(len(title),title[0] , title[1])
         row[0].value = title[titlecount - 2]  # Update cell value with title
         titlecount += 1
    
     descriptioncount = 2
     for row in ws.iter_rows(min_row=2, max_row=len(description)+1, min_col=5, max_col=5):  # Iterate over column "D"
-        print(len(description), description[0], description[1])
         row[0].value = description[descriptioncount - 2]  # Update cell value with description
         descriptioncount += 1
 
     keywordscount = 2
     for row in ws.iter_rows(min_row=2, max_row=len(keywords)+1, min_col=6, max_col=6):  # Iterate over column "E"
-        print(len(keywords), keywords[0], keywords[1])
         row[0].value = keywords[keywordscount - 2]  # Update cell value with keywords
         keywordscount += 1
 
@@ -199,25 +217,25 @@ def uploadfile(uploaded_file):
             file_type, url = row[0].value, row[1].value
             if file_type == "Pdf":
                 results = process_pdf_documents(url)
-                titlesplit = results.split('Title--')
-                descriptionsplit = titlesplit[1].split('Description--')
-                filename.append(titlesplit[0].replace("FileName--",""))
-                title.append(descriptionsplit[0].replace("Title--",""))
-                keywordsplit = descriptionsplit[1].split('Keywords--')
-                description.append(keywordsplit[0])
-                keywords.append(keywordsplit[1])
+                print(results)
+                results = results.replace("```json","").replace("```","")
+                jsonvalue = json.loads(results)
+                filename.append(jsonvalue["FileName"])
+                title.append(jsonvalue["Title"])
+                description.append(jsonvalue["Description"])
+                keywords.append(jsonvalue["Keywords"])
 
             elif file_type == "Image":
                 print(url)
                 results = imagetotext(url)
                 print(results)
-                titlesplit = results.split('Title:')
-                descriptionsplit = titlesplit[1].split('Description:')
-                filename.append(titlesplit[0].replace("FileName:",""))
-                title.append(descriptionsplit[0].replace("Title:",""))
-                keywordsplit = descriptionsplit[1].split('Keywords:')
-                description.append(keywordsplit[0])
-                keywords.append(keywordsplit[1])
+                results = results.replace("```json","").replace("```","")
+                jsonvalue = json.loads(results)
+                filename.append(jsonvalue["FileName"])
+                title.append(jsonvalue["Title"])
+                description.append(jsonvalue["Description"])
+                keywords.append(jsonvalue["Keywords"])
+
 
         if filename and title and description and keywords:
             updated_file_path = update_excel_with_seo(uploaded_file, filename, title, description, keywords)
