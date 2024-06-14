@@ -12,12 +12,19 @@ image_urls = [
 ]
 
 
-first_row_columns = st.columns(3)
-for i, (image_url, page_url,name) in enumerate(image_urls[:3]):
-    with first_row_columns[i]:
-        st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' style='margin-right: 10px' width='230' height='150'></a>", unsafe_allow_html=True)
+for image_url, page_url , name in image_urls[:5]:
+    st.title(name+":")
+    st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' width='600' height='350'></a>", unsafe_allow_html=True)
 
-second_row_columns = st.columns(2)
-for i, (image_url, page_url,name) in enumerate(image_urls[3:], start=0):
-    with second_row_columns[i]:
-        st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' width='350' height='200'></a>", unsafe_allow_html=True)
+
+
+
+# first_row_columns = st.columns(3)
+# for i, (image_url, page_url,name) in enumerate(image_urls[:3]):
+#     with first_row_columns[i]:
+#         st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' style='margin-right: 10px' width='230' height='150'></a>", unsafe_allow_html=True)
+
+# second_row_columns = st.columns(2)
+# for i, (image_url, page_url,name) in enumerate(image_urls[3:], start=0):
+#     with second_row_columns[i]:
+#         st.markdown(f"<a href='{page_url}' target='_blank'><img src='{image_url}' width='350' height='200'></a>", unsafe_allow_html=True)
