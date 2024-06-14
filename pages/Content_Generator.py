@@ -27,6 +27,7 @@ load_dotenv()
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
 PINECONE_SEO_INDEX = st.secrets["PINECONE_SEO_INDEX"]
+PINECONE_INDEX = st.secrets["PINECONE_INDEX"]
 
 
 # Load prompts from JSON file
