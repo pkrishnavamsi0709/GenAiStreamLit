@@ -6,7 +6,7 @@ import google.generativeai as genai
 from langchain import PromptTemplate
    
  
-api_key = st.secrets[gemini_api]
+api_key = st.secrets["gemini_api"]
 genai.configure(api_key=api_key)
  
 st.set_page_config(page_title="Description of Products", page_icon="📸")
