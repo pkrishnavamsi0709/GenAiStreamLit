@@ -142,7 +142,7 @@ if not querybytype:
         
 if st.button("Generate Content"):
     retriever = retriever_existingdb()
-    if(querybytype == True):
+    if(querybytype != True):
        response = contentgenerator_llm(retriever, queryfromfe, contenttype.lower(), format_type.lower())
     else:
        response = query_llm(retriever, queryfromfe)
