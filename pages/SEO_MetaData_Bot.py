@@ -22,16 +22,6 @@ import openpyxl
 import tempfile
 import requests
 import io, json
-from dotenv import load_dotenv
-import os
-
-
-load_dotenv()  
-
-
-# GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-# PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
-# PINECONE_SEO_INDEX = os.getenv("PINECONE_SEO_INDEX")
 
 GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
