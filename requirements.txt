@@ -2,6 +2,7 @@ google-generativeai
 langchain_google_genai
 streamlit
 langchain
+langchain_core
 langchain_pinecone
 langchain_community
 python-dotenv
