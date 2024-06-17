@@ -15,5 +15,6 @@ openpyxl
 rapidocr-onnxruntime
 vertexai
 numpy
+Ipython
 
 
