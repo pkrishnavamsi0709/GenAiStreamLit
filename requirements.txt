@@ -14,5 +14,6 @@ pypdf
 flask
 openpyxl
 rapidocr-onnxruntime
+tenacity
 
 
