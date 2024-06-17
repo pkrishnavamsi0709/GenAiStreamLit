@@ -13,6 +13,4 @@ pypdf
 flask
 openpyxl
 rapidocr-onnxruntime
-apt:
-  libgl1-mesa-glx
 
