@@ -13,4 +13,7 @@ pypdf
 flask
 openpyxl
 rapidocr-onnxruntime
+vertexai
+numpy
+
 
