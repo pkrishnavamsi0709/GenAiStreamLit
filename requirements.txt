@@ -17,5 +17,7 @@ flask
 openpyxl
 rapidocr-onnxruntime
 tenacity
+asyncio
+
 
 
