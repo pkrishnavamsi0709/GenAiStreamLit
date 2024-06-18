@@ -2,3 +2,5 @@ google.generativeai
 streamlit
 langchain==0.2.1
 python-dotenv
+langchain-google-genai
+langchain-core
